@@ -36,7 +36,12 @@ const findAll = async (req, res) => {
   try {
     const data = await Grade.find();
 
-    res.send(data);
+    if (!data) {
+      res.send('Nao encontrato o aluno id: ' + id);
+    } else {
+      res.send(data);
+    }
+
     logger.info(`GET /grade`);
   } catch (error) {
     res
@@ -115,6 +120,14 @@ const remove = async (req, res) => {
 
 const removeAll = async (req, res) => {
   try {
+    const data = await Grade.deleteMany();
+
+    if (!data) {
+      res.send('Nao encontrato o aluno');
+    } else {
+      res.send('Alunos excluidos com sucesso');
+    }
+
     logger.info(`DELETE /grade`);
   } catch (error) {
     res.status(500).send({ message: 'Erro ao excluir todos as Grades' });
