@@ -34,7 +34,7 @@ const findAll = async (req, res) => {
     : {};
 
   try {
-    const data = await Grade.find();
+    const data = await Grade.find(condition);
 
     if (!data) {
       res.send('Nao encontrato o aluno id: ' + id);
